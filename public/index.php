@@ -1,32 +1,47 @@
 <?php
+use Phalcon\Di\FactoryDefault;
 
 error_reporting(E_ALL);
 
-use Phalcon\Mvc\Application;
-use Phalcon\Config\Adapter\Ini as ConfigIni;
+define('BASE_PATH', dirname(__DIR__));
+define('APP_PATH', BASE_PATH . '/app');
 
 try {
-    define('APP_PATH', realpath('..') . '/');
 
     /**
-     * Read the configuration
+     * The FactoryDefault Dependency Injector automatically registers
+     * the services that provide a full stack framework.
      */
-    $config = new ConfigIni(APP_PATH . 'app/config/config.ini');
-    if (is_readable(APP_PATH . 'app/config/config.ini.dev')) {
-        $override = new ConfigIni(APP_PATH . 'app/config/config.ini.dev');
-        $config->merge($override);
-    }
+    $di = new FactoryDefault();
 
     /**
-     * Auto-loader configuration
+     * Handle routes
      */
-    require APP_PATH . 'app/config/loader.php';
+    include APP_PATH . '/config/router.php';
 
-    $application = new Application(new Services($config));
+    /**
+     * Read services
+     */
+    include APP_PATH . '/config/services.php';
 
-    // NGINX - PHP-FPM already set PATH_INFO variable to handle route
-    echo $application->handle(!empty($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : null)->getContent();
-} catch (Exception $e){
+    /**
+     * Get config service for use in inline setup below
+     */
+    $config = $di->getConfig();
+
+    /**
+     * Include Autoloader
+     */
+    include APP_PATH . '/config/loader.php';
+
+    /**
+     * Handle the request
+     */
+    $application = new \Phalcon\Mvc\Application($di);
+
+    echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
+
+} catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';
 }

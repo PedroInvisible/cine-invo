@@ -1,0 +1,122 @@
+<html>
+ <head>
+  <title>Bienvenido a Cinema</title>
+  {{ stylesheet_link('css/bootstrap.min.css') }}
+  {{ javascript_include('js/bootstrap.min.js') }}
+ </head>
+ <body>
+ <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+     <!-- Brand and toggle get grouped for better mobile display -->
+     <div class="container-fluid">
+         <div class="navbar-header">
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+             </button>
+         <h1>Bienvenido a Cinema</h1>
+             <p>Cinema te permite llevar un registro de tus peliculas, los actores y directores asociados a estasy mucho mas!</p>
+             <ul class="nav navbar-nav">
+                 <li><a href="{{ url('peliculas') }}">Peliculas</a></li>
+         <li><a href="{{ url('actores') }}">Actores</a></li>
+         <li><a href="{{ url('directores') }}">Directores</a></li>
+         <li><a href="{{ url('generos') }}">Generos</a></li>
+         <li><a href="{{ url('idiomas') }}">Idiomas</a></li>
+         <li><a href="{{ url('nationality') }}">Nacionalidad</a></li>
+             </ul>
+         </div>
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="navbarCollapse">
+             
+         </div>
+     </div>
+ </nav>
+<div class="container-fluid" style="margin-top:120px">
+
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous"><?php echo $this->tag->linkTo(["peliculas", "Volver"]) ?></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="page-header">
+    <h1>
+        Editar la Informacion de Peliculas
+    </h1>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<?php
+    echo $this->tag->form(
+        [
+            "peliculas/save",
+            "autocomplete" => "off",
+            "class" => "form-horizontal"
+        ]
+    );
+?>
+
+<div class="form-group">
+    <label for="fieldId" class="col-sm-2 control-label">Id</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["id", "type" => "number", "class" => "form-control", "id" => "fieldId"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldNombre" class="col-sm-2 control-label">Nombre de la Pelicula</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["nombre", "size" => 30, "class" => "form-control", "id" => "fieldNombre"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldIdGenero" class="col-sm-2 control-label">Numero Id del Genero</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["id_genero", "type" => "number", "class" => "form-control", "id" => "fieldIdGenero"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldYear" class="col-sm-2 control-label">Año de Realizacion</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["year", "type" => "date", "class" => "form-control", "id" => "fieldYear"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldIdIdioma" class="col-sm-2 control-label">Numero Id del Idioma</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["id_idioma", "type" => "number", "class" => "form-control", "id" => "fieldIdIdioma"]) ?>
+    </div>
+</div>
+
+
+<?php echo $this->tag->hiddenField("id") ?>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php echo $this->tag->submitButton(["Guardar", "class" => "btn btn-default"]) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->endForm(); ?>
+   <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <footer>
+                <p>&copy; Cinema te permite llevar un registro de tus peliculas, los actores y directores asociados a estasy mucho mas! </p>
+            </footer>
+        </div>
+    </div>
+</div>

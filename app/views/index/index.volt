@@ -1,24 +1,51 @@
+<html>
+ <head>
+  <title>Bienvenido a Cinema</title>
+  {{ stylesheet_link('css/bootstrap.min.css') }}
+  {{ javascript_include('js/bootstrap.min.js') }}
+ </head>
+ <body>
+ <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation" >
+     <!-- Brand and toggle get grouped for better mobile display -->
+     <div class="container-fluid">
+         <div class="navbar-header">
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+             </button>
+	     <h1>Bienvenido a Cinema</h1>
+    	     <p>Cinema te permite llevar un registro de tus peliculas, los actores y directores asociados a estasy mucho mas!</p>
+             <ul class="nav navbar-nav">
+                 <li><a href="{{ url('peliculas') }}">Peliculas</a></li>
+		 <li><a href="{{ url('actores') }}">Actores</a></li>
+		 <li><a href="{{ url('directores') }}">Directores</a></li>
+		 <li><a href="{{ url('generos') }}">Generos</a></li>
+		 <li><a href="{{ url('idiomas') }}">Idiomas</a></li>
+		 <li><a href="{{ url('nationality') }}">Nacionalidad</a></li>
+             </ul>
+         </div>
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="navbarCollapse">
+             
+         </div>
+     </div>
+ </nav>
+  {% block content %}
+  {% endblock %}
 
-{{ content() }}
-
-<div class="jumbotron">
-    <h1>Welcome to INVO</h1>
-    <p>INVO is a revolutionary application to create invoices online for free.
-    Receive online payments from your clients and improve your cash flow</p>
-    <p>{{ link_to('register', 'Try it for Free &raquo;', 'class': 'btn btn-primary btn-large btn-success') }}</p>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <footer>
+                <p>&copy; Cinema te permite llevar un registro de tus peliculas, los actores y directores asociados a estasy mucho mas! </p>
+            </footer>
+        </div>
+    </div>
 </div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Manage Invoices Online</h2>
-        <p>Create, track and export your invoices online. Automate recurring invoices and design your own invoice using our invoice template and brand it with your business logo. </p>
-    </div>
-    <div class="col-md-4">
-        <h2>Dashboards And Reports</h2>
-        <p>Gain critical insights into how your business is doing. See what sells most, who are your top paying customers and the average time your customers take to pay.</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Invite, Share And Collaborate</h2>
-        <p>Invite users and share your workload as invoice supports multiple users with different permissions. It helps your business to be more productive and efficient. </p>
-    </div>
-</div>
+ </body>
+</html>
+ 
+<span style="font-family: Times New Roman;"><span style="white-space: normal;">
+</span></span>
